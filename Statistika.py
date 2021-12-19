@@ -1,0 +1,151 @@
+# nápad na projekt z tohoto webu: https://www.itnetwork.cz/python/formulare/resene-ulohy-pyqt-zakladni-ovladaci-prvky-obsluha-udalosti
+# (Pouze inspirace grafickou stránkou projektu)
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+# Kód vytvořený designerem (program na vytváření GUI)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        # Deklarace proměnných
+        self.poleCisel = []
+
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.setFixedSize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(40, 30, 81, 31))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(40, 80, 91, 31))
+        self.label_2.setObjectName("label_2")
+        self.cisla_label = QtWidgets.QLabel(self.centralwidget)
+        self.cisla_label.setGeometry(QtCore.QRect(140, 80, 601, 31))
+        self.cisla_label.setText("")
+        self.cisla_label.setObjectName("cisla_label")
+        self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
+        self.spinBox.setGeometry(QtCore.QRect(140, 30, 251, 22))
+        self.spinBox.setObjectName("spinBox")
+        self.spinBox.setMaximum(10000)
+        self.spinBox.setMinimum(-10000)
+        self.pridat_button = QtWidgets.QPushButton(self.centralwidget)
+        self.pridat_button.setGeometry(QtCore.QRect(404, 30, 161, 23))
+        self.pridat_button.setObjectName("pridat_button")
+        self.vymazat_button = QtWidgets.QPushButton(self.centralwidget)
+        self.vymazat_button.setGeometry(QtCore.QRect(580, 30, 161, 23))
+        self.vymazat_button.setObjectName("vymazat_button")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(40, 130, 90, 31))
+        self.label_3.setObjectName("label_3")
+        self.Serazeni_combobox = QtWidgets.QComboBox(self.centralwidget)
+        self.Serazeni_combobox.setGeometry(QtCore.QRect(140, 130, 601, 22))
+        self.Serazeni_combobox.setObjectName("Serazeni_combobox")
+        self.vypocet_button = QtWidgets.QPushButton(self.centralwidget)
+        self.vypocet_button.setGeometry(QtCore.QRect(140, 170, 601, 23))
+        self.vypocet_button.setObjectName("vypocet_button")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(40, 220, 90, 31))
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(40, 270, 90, 31))
+        self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(40, 320, 90, 31))
+        self.label_6.setObjectName("label_6")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(40, 370, 90, 31))
+        self.label_7.setObjectName("label_7")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(40, 420, 151, 31))
+        self.label_8.setObjectName("label_8")
+        self.soucetcisel_label = QtWidgets.QLabel(self.centralwidget)
+        self.soucetcisel_label.setGeometry(QtCore.QRect(160, 220, 90, 31))
+        self.soucetcisel_label.setText("")
+        self.soucetcisel_label.setObjectName("soucetcisel_label")
+        self.nejmensicislo_label = QtWidgets.QLabel(self.centralwidget)
+        self.nejmensicislo_label.setGeometry(QtCore.QRect(160, 270, 90, 31))
+        self.nejmensicislo_label.setText("")
+        self.nejmensicislo_label.setObjectName("nejmensicislo_label")
+        self.nejvetsicislo_label = QtWidgets.QLabel(self.centralwidget)
+        self.nejvetsicislo_label.setGeometry(QtCore.QRect(160, 320, 90, 31))
+        self.nejvetsicislo_label.setText("")
+        self.nejvetsicislo_label.setObjectName("nejvetsicislo_label")
+        self.prumer_label = QtWidgets.QLabel(self.centralwidget)
+        self.prumer_label.setGeometry(QtCore.QRect(160, 370, 90, 31))
+        self.prumer_label.setText("")
+        self.prumer_label.setObjectName("prumer_label")
+        self.podlevelikosti_label = QtWidgets.QLabel(self.centralwidget)
+        self.podlevelikosti_label.setGeometry(QtCore.QRect(170, 420, 571, 31))
+        self.podlevelikosti_label.setText("")
+        self.podlevelikosti_label.setObjectName("podlevelikosti_label")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.Serazeni_combobox.addItem("Seřadit sestupně")
+        self.Serazeni_combobox.addItem("Seřadit vzestupně")
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        # Přiřazení tlačítek k funkcím
+        self.pridat_button.clicked.connect(self.pridejCislo)
+        self.vymazat_button.clicked.connect(self.smazCisla)
+        self.vypocet_button.clicked.connect(self.vypocitat)
+
+    # funkce která přidá číslo do listu, a vypíše list na label
+    def pridejCislo(self):
+        self.poleCisel.append(self.spinBox.value())
+        self.cisla_label.setText(str(self.poleCisel))
+
+    # Restart programu, vynuluje proměnné a vymaže texty
+    def smazCisla(self):
+        self.poleCisel.clear()
+        self.cisla_label.setText("")
+        self.spinBox.setValue(0)
+        self.soucetcisel_label.setText("")
+        self.nejmensicislo_label.setText("")
+        self.nejvetsicislo_label.setText("")
+        self.podlevelikosti_label.setText("")
+        self.prumer_label.setText("")
+
+    # Funkce na zjištění součtu čísel, největší a nejmenší číslo, průměr zadaných hodnot a jejich seřazení podle uživatelského výberu
+    def vypocitat(self):
+        self.soucetcisel_label.setText(str(sum(self.poleCisel)))
+        self.nejmensicislo_label.setText(str(min(self.poleCisel)))
+        self.nejvetsicislo_label.setText(str(max(self.poleCisel)))
+        self.prumer_label.setText(str(sum(self.poleCisel) / len(self.poleCisel)))
+        if self.Serazeni_combobox.currentText() == "Seřadit vzestupně":
+            self.poleCisel.sort()
+            self.podlevelikosti_label.setText(str(self.poleCisel))
+        else:
+            self.poleCisel.sort(reverse=True)
+            self.podlevelikosti_label.setText(str(self.poleCisel))
+
+    # Kód vytvořený designerem
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Statistiky"))
+        self.label.setText(_translate("MainWindow", "Zadej čísla:"))
+        self.label_2.setText(_translate("MainWindow", "Zadaná čísla:"))
+        self.pridat_button.setText(_translate("MainWindow", "Přidat číslo"))
+        self.vymazat_button.setText(_translate("MainWindow", "Vymazat čísla"))
+        self.label_3.setText(_translate("MainWindow", "Seřadit:"))
+        self.vypocet_button.setText(_translate("MainWindow", "Vypočítat"))
+        self.label_4.setText(_translate("MainWindow", "Součet čísel:"))
+        self.label_5.setText(_translate("MainWindow", "Nejmenší číslo:"))
+        self.label_6.setText(_translate("MainWindow", "Největší číslo:"))
+        self.label_7.setText(_translate("MainWindow", "Průměr:"))
+        self.label_8.setText(_translate("MainWindow", "Seřazená podle velikosti:"))
+
+# Kód vytvořený designerem, spouští grafickou část programu
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
